@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+	<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+		<!-- namespace表示命名空间，值是唯一的并且为接口的名称 
+		实现类不需要写，mybatis框架会自定生成接口的实现类 -->
+	<mapper namespace="com.bridgeleed.store.mapper.GoodsCategoryMapper">
+	   <select id="selectGoodsCategory" resultType="com.bridgeleed.store.bean.GoodsCategory">
+	      select 
+	      id,
+	      parent_id parentId,
+	      name,
+	      status,
+	      sort_order sortOrder,
+	      is_parent isParent,
+	      created_user createdUser,
+	      created_time createdTime,
+	      modified_user modifiedUser,
+	      modified_time modifiedTime
+	      from
+	        t_goods_category
+	      where
+	        parent_id=#{parentId}
+	        and status=1
+	      <if test="offset!=null">
+	       limit #{offset},#{count}
+	      </if>
+	      
+	      
+	   </select>
+	 
+	</mapper>
+	
+	
+	
+	
+	
+	
+	
+	
+	

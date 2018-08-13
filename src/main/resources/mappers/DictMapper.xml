@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+	<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+		<!-- namespace表示命名空间，值是唯一的并且为接口的名称 
+		实现类不需要写，mybatis框架会自定生成接口的实现类 -->
+	<mapper namespace="com.bridgeleed.store.mapper.DictMapper">
+	 <select id="selectProvince" resultType="com.bridgeleed.store.bean.Province">
+	   select id,province_code provinceCode,province_name provinceName
+	   from t_dict_provinces
+	 </select>
+	 
+	 <select id="selectCity" resultType="com.bridgeleed.store.bean.City">
+	   select id,province_code provinceCode,city_name cityName,city_code cityCode
+	   
+	   from  t_dict_cities
+	   where province_code=#{provinceCode}
+	 
+	 </select>
+	 
+	 <select id="selectArea" resultType="com.bridgeleed.store.bean.Area">
+	 select id,city_code cityCode,area_name areaName,area_code areaCode
+	   
+	   from  t_dict_areas
+	   where city_code=#{cityCode}
+	 
+	 </select>
+	 
+	 
+	 <select id="selectByProvinceCode" resultType="java.lang.String">
+		select
+			province_name
+		from
+			t_dict_provinces
+		where
+			province_code = #{provinceCode}
+			
+	</select>
+	 
+	  <select id="selectByCityCode" resultType="java.lang.String">
+	  select city_name from t_dict_cities where city_code=#{cityCode}
+	 </select>
+	 
+	  <select id="selectByAreaCode" resultType="java.lang.String">
+	  select area_name from t_dict_areas where area_code=#{areaCode}
+	 </select>
+	</mapper>
+	
+	
+	
+	
+	
+	
+	
+	
+	

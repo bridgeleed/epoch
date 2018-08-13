@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+	<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+		<!-- namespace表示命名空间，值是唯一的并且为接口的名称 
+		实现类不需要写，mybatis框架会自定生成接口的实现类 -->
+	<mapper namespace="com.bridgeleed.store.mapper.AddressMapper">
+	 
+	 <insert id="insertAddress" parameterType="com.bridgeleed.store.bean.Address">
+			insert into t_address(
+			uid,recv_name,recv_province,recv_city,recv_area,
+			recv_district,recv_address,recv_phone,recv_tel,
+			recv_zip,recv_tag,isDefault,
+			created_user,created_time,
+			modified_user,modified_time
+		)values(
+			#{uid},#{recvName},#{recvProvince},#{recvCity},
+			#{recvArea},#{recvDistrict},#{recvAddress},
+			#{recvPhone},#{recvTel},#{recvZip},#{recvTag},
+			#{isDefault},
+			#{createdUser},#{createdTime},
+			#{modifiedUser},#{modifiedTime}
+		)
+		</insert>
+		
+		<select id="selectByUid" resultType="com.bridgeleed.store.bean.Address">
+		   select 
+			id,uid,recv_name recvName,
+			recv_province recvProvince,
+			recv_city recvCity,
+			recv_area recvArea,
+			recv_district recvDistrict,
+			recv_address recvAddress,
+			recv_phone recvPhone,
+			recv_tel recvTel,
+			recv_zip recvZip,
+			recv_tag recvTag,
+			isDefault,
+			created_user createdUser,
+			created_time createdTime,
+			modified_user modifiedUser,
+			modified_time modifiedTime
+		from
+			t_address
+		where
+			uid = #{uid}
+		order by isDefault desc	
+		
+			
+		 
+		</select>
+		
+		<update id="updateByUid">
+		  update t_address
+		  set
+		   isDefault=0
+		   where
+		    uid=#{uid}
+		    
+		</update>
+		
+		<update id="updateById">
+		  update t_address
+		  set
+		   isDefault=1
+		   where
+		    id=#{id}
+		</update>
+		
+		<select id="selectById" resultType="com.bridgeleed.store.bean.Address">
+		  select 
+		    id,uid,recv_name recvName,
+			recv_province recvProvince,
+			recv_city recvCity,
+			recv_area recvArea,
+			recv_district recvDistrict,
+			recv_address recvAddress,
+			recv_phone recvPhone,
+			recv_tel recvTel,
+			recv_zip recvZip,
+			recv_tag recvTag,
+			isDefault,
+			created_user createdUser,
+			created_time createdTime,
+			modified_user modifiedUser,
+			modified_time modifiedTime
+			from
+			  t_address
+			where
+			  id=#{id}
+		</select>
+		 
+		<update id="updateAddressById" parameterType="com.bridgeleed.store.bean.Address">
+		 update t_address
+		 set recv_name=#{recvName},
+		 recv_province=#{recvProvince},
+		 recv_city=#{recvCity},
+		 recv_area=#{recvArea},
+		 recv_district=#{recvDistrict},
+		 recv_address=#{recvAddress},
+		 recv_phone=#{recvPhone},
+		 recv_tel=#{recvTel},
+		 recv_zip=#{recvZip},
+		 recv_tag=#{recvTag}
+		 where
+		   id=#{id}
+		</update>
+		
+		<delete id="deleteAddressById">
+		  delete from t_address where id=#{id}
+		</delete>
+	 
+	 
+	</mapper>
+	
+	
+	
+	
+	
+	
+	
+	
+	
